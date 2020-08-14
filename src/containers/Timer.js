@@ -32,10 +32,10 @@ const Timer = () => {
 
   useEffect(() => {
     if (totalTime > 0) {
-      if (leftTime <= totalTime / 2) {
-        setNoticeText("More than halfway there!");
-      } else if (leftTime <= 0) {
+      if (leftTime <= 0) {
         setNoticeText("Time’s up!");
+      } else if (leftTime <= totalTime / 2) {
+        setNoticeText("More than halfway there!");
       } else {
         setNoticeText("");
       }
@@ -73,11 +73,12 @@ const Timer = () => {
   }, [running]);
 
   const startTimer = () => {
-
     endTimer();
 
     intervalTimer = setInterval(() => {
-      setLeftTime((leftTime) => leftTime > INTERVAL ? leftTime - INTERVAL : 0);
+      setLeftTime((leftTime) =>
+        leftTime > INTERVAL ? leftTime - INTERVAL : 0
+      );
     }, INTERVAL / speed);
   };
 
